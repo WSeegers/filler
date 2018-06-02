@@ -1,43 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   filler.c                                           :+:      :+:    :+:   */
+/*   place_token.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wseegers <wseegers.mauws@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/31 23:59:22 by wseegers          #+#    #+#             */
-/*   Updated: 2018/06/02 09:44:58 by wseegers         ###   ########.fr       */
+/*   Created: 2018/06/02 09:44:36 by wseegers          #+#    #+#             */
+/*   Updated: 2018/06/02 09:47:50 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "filler.h"
-#include "f_io.h"
 #include <limits.h>
-#include "f_io.h"
-#include "f_string.h"
+#include "filler.h"
 #include "f_print.h"
-#include "f_memory.h"
 
-int		main(void)
+void	place_token(t_info *info)
 {
-	t_info	*info;
-
-	info = NULL;
-	init_game(&info);
-	while (1)
+	if (info->token_row < INT_MAX)
 	{
-		if (!info->m_tok)
-			get_gameinfo(info);	
-		else
-			f_skip_line(STDIN);
-		if(parse_map(info))
-		{
-			f_print_str("\n");
-			continue ;
-		}
-		parse_token(info);
-		eval_map(info);
-		eval_token(info);
-		place_token(info);
+		f_print_nbr(info->token_row);
+		f_print_str(" ");
+		f_print_nbr(info->token_col);
 	}
+	else
+		f_print_str("0 0");
+	f_print_str("\n");
 }

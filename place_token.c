@@ -1,37 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   place_token.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wseegers <wseegers.mauws@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/01 00:03:36 by wseegers          #+#    #+#             */
-/*   Updated: 2018/06/01 01:20:20 by wseegers         ###   ########.fr       */
+/*   Created: 2018/06/02 09:44:36 by wseegers          #+#    #+#             */
+/*   Updated: 2018/06/02 09:47:50 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include "f_io.h"
-#include "f_string.h"
+#include <limits.h>
+#include "filler.h"
 #include "f_print.h"
 
-int		main(void)
+void	place_token(t_info *info)
 {
-	char buff[500];
-	char *buf;
-	int 	ret;
-
-
-	f_next_line(&buf, STDIN);
-	f_next_line(&buf, STDIN);
-	f_next_line(&buf, STDIN);
-
-	while (f_next_line(&buf, STDIN))
+	if (info->token_row < INT_MAX)
 	{
-		f_print_err(buf);
-		f_print_err("\n");
+		f_print_nbr(info->token_row);
+		f_print_str(" ");
+		f_print_nbr(info->token_col);
 	}
-	f_print_err("prog end");
-	return (0);
+	else
+		f_print_str("0 0");
+	f_print_str("\n");
 }
